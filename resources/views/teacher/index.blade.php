@@ -28,6 +28,12 @@
                     @endforeach
                 </tbody>
             </thead>
+            <div style="display: none;">
+                {{ $list_teacher->links() }}
+            </div>
         </table>
+        <div style="text-align: center;">
+            {{ $list_teacher->links() }}
+        </div>
     </div>
 @endsection

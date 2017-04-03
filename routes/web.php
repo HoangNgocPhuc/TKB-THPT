@@ -32,6 +32,8 @@ Route::group(['middleware' => 'admin'],function(){
 	Route::post('class/{id}', 'ClassRoomController@update');
 	Route::get('class/delete/{id}', 'ClassRoomController@delete')->name('class.delete');
 	Route::get('class/{id}/generaltimetable', 'ClassRoomController@generalTimeTable')->name('class.generalTimeTable');
+	Route::get('class/{id}/timetable', 'ClassRoomController@timetable')->name('class.timetable');
+
 	Route::get('class/{id}/generaltimetable/add', 'ClassRoomController@addTimeTable')->name('class.generaltimetable.add');
 	Route::post('class/{id}/generaltimetable/add', 'ClassRoomController@addtoTimeTable');
 	Route::get('class/{class_id}/generaltimetable/{subject_id}/', 'ClassRoomController@editTimeTable')->name('class.generaltimetable.edit');
@@ -59,4 +61,6 @@ Route::group(['middleware' => 'admin'],function(){
 	Route::get('subject/{id}', 'SubjectController@edit')->name('subject.edit');
 	Route::post('subject/{id}', 'SubjectController@update');
 	Route::get('subject/delete/{id}', 'SubjectController@delete')->name('subject.delete');
+
+	Route::get('sort', 'SortController@sort')->name('sort');
 });

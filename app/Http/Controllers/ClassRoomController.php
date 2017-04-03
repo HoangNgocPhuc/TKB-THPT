@@ -8,7 +8,7 @@ use App\classroom;
 use App\class_subject_teacher;
 use App\teacher;
 use App\subject;
-
+use App\timetable;
 class ClassRoomController extends Controller
 {
 
@@ -19,7 +19,7 @@ class ClassRoomController extends Controller
      */
     public function index()
     {
-        $class = classroom::all();
+        $class = classroom::paginate(config('my.paginate'));
         return view('class.index', compact('class'));
     }
 
@@ -144,5 +144,11 @@ class ClassRoomController extends Controller
         $subject = $request->subject;
         $list_teacher = teacher::where('mamon', $subject)->get();
         return view('class.html_list_teachet', compact('list_teacher'));
+    }
+
+    public function timetable($id){
+        $class = classroom::where('malop', $id)->first();
+        $timetable = timetable::where('malop', $id)->get();
+        return view('class.timetable', compact('timetable', 'class'));
     }
 }

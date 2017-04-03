@@ -14,7 +14,7 @@ class TeacherController extends Controller
 {
 
     public function index(){
-    	$list_teacher = teacher::all();
+    	$list_teacher = teacher::paginate(config('my.paginate'));
     	return view('teacher.index', compact('list_teacher'));
     }
 

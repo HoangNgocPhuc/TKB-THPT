@@ -6,6 +6,18 @@
     @endforeach
     <div class="panel panel-default">
   <!-- Default panel contents -->
+        <div class="panel-heading"><a href="{{ route('sort') }}"><button class="btn btn-primary">Sắp xếp thời khóa biểu</button></a></div>
+        <div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                <ul>
+            @foreach(session('status') as $error )
+                <li>{{ $error }}</li>
+            @endforeach
+                </ul>
+            </div>
+        @endif 
+        </div>
         <div class="panel-heading">Danh sách lớp học toàn trường</div>
         <div class="panel-heading"><a href="{{ route('class.add') }}"><button class="btn btn-primary">Thêm</button>
         <table class="table">
@@ -19,7 +31,7 @@
                     <th>Tùy chọn</th>
                     <th>Môn học</th>
                 </tr>
-                <tbody>
+                <body>
                     @foreach ($class as $key => $value)
                         <tr>
                             <td>{{ $key + 1 }}</td>
@@ -33,11 +45,18 @@
                             </td>
                             <td>
                                 <a href="{{ route('class.generalTimeTable', $value->malop) }}"><button class="btn btn-primary">Môn học</button></a>
+                                <a href="{{ route('class.timetable', $value->malop) }}"><button class="btn btn-primary">Thời khóa biểu</button></a>
                             </td>
                         </tr>
                     @endforeach
-                </tbody>
+                </body>    
             </thead>
+            <div style="display: none;">
+                {{ $class->links() }}
+            </div>
         </table>
+        <div style="text-align: center;">
+           {{ $class->links() }}
+        </div>
     </div>
 @endsection
