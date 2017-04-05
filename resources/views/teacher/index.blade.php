@@ -23,6 +23,7 @@
                             <td>
                                 <a href="{{ route('teacher.edit', $value->id) }}"><button class="btn btn-primary">Chỉnh sửa</button></a>
                                 <a href="{{ route('teacher.delete', $value->id) }}" onclick="return confirm('are you sure?')"><button class="btn btn-danger">Xóa</button></a>
+                                <a href="{{ route('teacher.timetable', $value->magv) }}"><button class="btn btn-primary">Thời khóa biểu</button></a>
                             </td>
                         </tr>
                     @endforeach

@@ -54,6 +54,7 @@ Route::group(['middleware' => 'admin'],function(){
 	Route::get('teacher/{id}', 'TeacherController@edit')->name('teacher.edit');
 	Route::post('teacher/{id}', 'TeacherController@update');
 	Route::get('teacher/delete/{id}', 'TeacherController@delete')->name('teacher.delete');
+	Route::get('teacher/{id}/timetable', 'TeacherController@timetable')->name('teacher.timetable');
 
 	Route::get('subject', 'SubjectController@index')->name('subject.index');
 	Route::get('subject/add', 'SubjectController@add')->name('subject.add');

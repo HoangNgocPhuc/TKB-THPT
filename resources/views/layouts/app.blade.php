@@ -45,10 +45,10 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                   <div class="profile_pic">
-                    <img src="{{ url('images/img.jpg') }}" alt="..." class="img-circle profile_img">
+                    <a href="{{ url('/') }}"><img src="{{ url('images/img.jpg') }}" alt="..." class="img-circle profile_img"></a>
                   </div>
                   <div class="profile_info">
-                    <h2>Admin</h2>
+                    <h2><a href="{{ url('/') }}">Admin</a></h2>
                   </div>
                 </div>
                 <!-- /menu profile quick info -->

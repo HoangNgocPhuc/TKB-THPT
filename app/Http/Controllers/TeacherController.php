@@ -65,4 +65,16 @@ class TeacherController extends Controller
     	teacher::find($id)->delete();
     	return redirect(route('teacher.index'));
     }
+
+    public function timetable($id){
+        $timetable = timetable::where('magv', $id)->orderBy('tiet')->get();
+        $teacher = teacher::where('magv', $id)->first();
+
+        $arr_timetable = array();
+        foreach ($timetable as $key => $value) {
+            $arr_timetable[$value['tiet']-1] = $value;
+        }
+
+        return view('teacher.timetable', compact('arr_timetable', 'teacher'));
+    }
 }

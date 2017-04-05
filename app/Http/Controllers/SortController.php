@@ -27,20 +27,13 @@ class SortController extends Controller
         $classroom = classroom::all();
         foreach ($classroom as $key => $value) {
             //sap xep thoi khoa bieu cua tung lop mot
-            if ($this->ok == 0){
-                unset($this->result);
-                $this->result = [];
-                $this->ok = 1;
-                $this->sort();
-                break;
-            }
             $this->sort_class($value->malop);
             if (count($this->result) == count($classroom)){
-                // echo "<pre>";
-                // print_r(count($this->result));
-                // echo "</pre>";
+                echo "<pre>";
+                print_r(($this->result));
+                echo "</pre>";
                 foreach ($this->result as $key => $a_class) {
-                    foreach ($a_class as $value) {
+                    foreach ($a_class as $key1 => $value) {
                         $timetable = new timetable();
                         $timetable->malop = $key;
                         $timetable->mamon = $value['mamon'];
@@ -50,7 +43,18 @@ class SortController extends Controller
                     }
                 }
                 return Redirect::route('class')->with('status', $arr_noti);
+                return;
+            
             }
+            if ($this->ok == 0){
+                unset($this->result);
+                $this->result = [];
+                break;
+            }
+        }
+        if ($this->ok == 0){
+            $this->ok = 1;
+            $this->sort();
         }
     }
 
@@ -81,8 +85,10 @@ class SortController extends Controller
             //tim mang thoa man ma random duoc
             $arr_subject = $this->find_arr_subject($aclass, $i);
             if (count($arr_subject) == 0){
-                // echo "<script>alert('reset')</script>";
+                echo "<script>alert('reset')</script>";
                 unset($aclass);
+                // unset($this->result);
+                // $this->result = []; 
                 $this->ok = 0;
                 break;
             }
