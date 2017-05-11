@@ -29,7 +29,6 @@
     </script> -->
 </head>
 <body class="nav-md">
-    @if (Auth::user()->isAdmin())
     <div class="container body">
         <div class="main_container">
 
@@ -48,7 +47,7 @@
                     <a href="{{ url('/') }}"><img src="{{ url('images/img.jpg') }}" alt="..." class="img-circle profile_img"></a>
                   </div>
                   <div class="profile_info">
-                    <h2><a href="{{ url('/') }}">Admin</a></h2>
+                    <h2><a href="{{ url('/') }}">{{ Auth::user()->isAdmin() ? 'Admin' : Auth::user()->name }}</a></h2>
                   </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -59,14 +58,27 @@
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                   <div class="menu_section">
                     <ul class="nav side-menu">
+                    @if (Auth::user()->isAdmin())
                       <li><a href="{{ route('class') }}">Quản lý lớp học</a>
                       </li>
                       <li><li><a href="{{ route('student.index') }}">Quản lý học sinh</a></li>
                       </li>
+                    @endif
+                    @if (Auth::user()->role ==0)
+                      <?php
+                        $email = Auth::user()->email;
+                        $name = substr($email, 0, strlen($email) - 10);
+                        // var_dump($name); die; 
+                      ?>
+                      <li><a href="{{ route('teacher.timetable', $name) }}">Thời khóa biểu</a></li>
+                      </li>
+                    @endif
                       <li><a href="{{ route('teacher.index') }}">Quản lý giáo viên</a></li>
                       </li>
+                    @if (Auth::user()->isAdmin())
                       <li><li><a href="{{ route('subject.index') }}">Quản lý môn học</a></li>
                       </li>
+                    @endif
                     </ul>
                   </div>
 
@@ -88,8 +100,8 @@
                   <ul class="nav navbar-nav navbar-right">
                     <li class="">
                       <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src=" {{url('images/img.jpg') }}" alt="">Admin
-                        <span class="glyphicon glyphicon-chevron-down"></span>
+                        <img src=" {{url('images/img.jpg') }}" alt="">
+                        <span class="glyphicon glyphicon-chevron-down">{{ Auth::user()->isAdmin() ? 'Admin' : Auth::user()->email }}</span>
                       </a>
                       <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li><a href="">Chỉnh sửa</a></li>
@@ -110,9 +122,6 @@
             </div>
         </div>
     </div>
-    @else
-    <div>user</div>
-    @endif
     <!-- Scripts -->
     <!-- jQuery -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>

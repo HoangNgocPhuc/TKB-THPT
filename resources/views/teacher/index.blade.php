@@ -4,7 +4,9 @@
     <div class="panel panel-default">
   <!-- Default panel contents -->
         <div class="panel-heading">Danh sách giáo viên toàn trường</div>
+        @if (Auth::user()->role == 1)
         <div class="panel-heading"><a href="{{ route('teacher.add') }}"><button class="btn btn-primary">Thêm giáo viên</button></a></div>
+        @endif
         <table class="table">
             <thead>
                 <tr>
@@ -21,8 +23,10 @@
                             <td>{{ $value->tengv }}</td>
                             <td>{{ $value->subject->tenmon }}</td>
                             <td>
+                                @if (Auth::user()->role == 1)
                                 <a href="{{ route('teacher.edit', $value->id) }}"><button class="btn btn-primary">Chỉnh sửa</button></a>
                                 <a href="{{ route('teacher.delete', $value->id) }}" onclick="return confirm('are you sure?')"><button class="btn btn-danger">Xóa</button></a>
+                                @endif
                                 <a href="{{ route('teacher.timetable', $value->magv) }}"><button class="btn btn-primary">Thời khóa biểu</button></a>
                             </td>
                         </tr>

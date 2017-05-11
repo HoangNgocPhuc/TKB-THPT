@@ -16,13 +16,14 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/', 'HomeController@index');
-
+Route::group(['middleware' => 'auth'],function(){
+	Route::get('/teacher', 'TeacherController@index')->name('teacher.index');
+});
 Route::group(['middleware' => 'admin'],function(){
 
 	Route::get('class', 'ClassRoomController@index')->name('class');
@@ -64,4 +65,9 @@ Route::group(['middleware' => 'admin'],function(){
 	Route::get('subject/delete/{id}', 'SubjectController@delete')->name('subject.delete');
 
 	Route::get('sort', 'SortController@sort')->name('sort');
+});
+
+Route::group(['middleware' => 'auth'],function(){
+	Route::get('/teacher', 'TeacherController@index')->name('teacher.index');
+	Route::get('teacher/{id}/timetable', 'TeacherController@timetable')->name('teacher.timetable');
 });

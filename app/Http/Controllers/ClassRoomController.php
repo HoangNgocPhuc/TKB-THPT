@@ -9,6 +9,7 @@ use App\class_subject_teacher;
 use App\teacher;
 use App\subject;
 use App\timetable;
+use App\User;
 class ClassRoomController extends Controller
 {
 
@@ -17,6 +18,7 @@ class ClassRoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $class = classroom::paginate(config('my.paginate'));
